@@ -9,7 +9,8 @@ from .utilities.CustomHelpFormatter import CustomHelpFormatter
 """ 
 Make sure that you have the Python KDevelop plugin installed.
 """
-
+ChromaticScale = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G"', 'A', 'A#', 'B']
+                  
 
 def main():
     parser = argparse.ArgumentParser(description='Describe your project', formatter_class=CustomHelpFormatter)
