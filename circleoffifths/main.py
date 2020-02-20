@@ -25,20 +25,28 @@ def Keyparser(keyargument):
             for i in ChromaticScaleFlat:
                 if Key == i:
                     print('The key was found in the chromatic scale! the key is: ' + Key)
+                    #Execute logic for scales and circleoffifths
+                    return True
         else:
             for i in ChromaticScaleSharp:
                 if Key == i:
-                    print('The key was found in the chromatic scale! the key is: ' + Key)
+                    print('The key was found in the                 chromatic scale! the key is: ' + Key)
+                    #Execute logic for scales and circleoffifths
+                    return True
     if len(Key) == 1:
         for i in ChromaticScaleSharp:
             if Key == i:
                 print('The key was found in the chromatic scale! the key is: ' + Key)
-    if len(Key) > 2:
-        print('Please input a proper key. The keys are the following: ') 
-        for i in ChromaticScaleFlat:
-                print(i)
-        for i in ChromaticScaleSharp:
-                print(i)
+                #Execute logic for scales and circleoffifths
+                return True
+    return False
+    
+#    if len(Key) > 2:
+#        print('Please input a proper key. The keys are the following: ') 
+#        for i in ChromaticScaleFlat:
+#                print(i)
+#        for i in ChromaticScaleSharp:
+#                print(i)
 
 #The main program runs version, help, name and scales parsing
 def main():
@@ -47,7 +55,12 @@ def main():
     parser.add_argument('-n', '--name', metavar='<name>', help='prints Hello There *Your name*')
     parser.add_argument('-s', '--scales', help='Use this parameter to print scales from a key. usage: -s *key* will print the keys scale')
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
-    Keyparser(args.scales)
+    boolean = Keyparser(args.scales)
+    if boolean == False:
+        print('Please input one of the following keys: ')
+        for i in ChromaticScale:
+                print(i)
+        
                 
 #    if len(args.scales) > 1:
 #        if args.scales[1] == 'b':
