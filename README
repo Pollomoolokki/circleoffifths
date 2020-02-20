@@ -2,7 +2,7 @@ Welcome to circleoffifths! This program will print minor and major scales for a 
 
 Example:
 
-python3 circleoffiths.py C
+python3 -m circleoffifths.__main__ -s C
 
 **
 C Major: C D E F G A B C
