@@ -14,10 +14,30 @@ ChromaticScaleSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#
 ChromaticScaleFlat = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B']
 def Majorkey():
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
+    
 def Minorkey():
     Steps = ['W', 'H', 'W', 'W', 'H', 'W', 'W']
-# def Keyparser():
-    
+def Keyparser(keyargument):
+    Key = keyargument
+    if len(Key) > 1:
+        if Key[1] == 'b':
+            for i in ChromaticScaleFlat:
+                if Key == i:
+                    print('The key was found in the chromatic scale! the key is: ' + Key)
+        else:
+            for i in ChromaticScaleSharp:
+                if Key == i:
+                    print('The key was found in the chromatic scale! the key is: ' + Key)
+    if len(Key) == 1:
+        for i in ChromaticScaleSharp:
+            if Key == i:
+                print('The key was found in the chromatic scale! the key is: ' + Key)
+    if len(Key) > 2:
+        print('Please input a proper key. The keys are the following: ') 
+        for i in ChromaticScaleFlat:
+                print(i)
+        for i in ChromaticScaleSharp:
+                print(i)
 
 #The main program runs version, help, name and scales parsing
 def main():
@@ -26,26 +46,27 @@ def main():
     parser.add_argument('-n', '--name', metavar='<name>', help='prints Hello There *Your name*')
     parser.add_argument('-s', '--scales', help='Use this parameter to print scales from a key. usage: -s *key* will print the keys scale')
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
-
-    if len(args.scales) > 1:
-        if args.scales[1] == 'b':
-            for i in ChromaticScaleFlat:
-                if args.scales == i:
-                    print('The key was found in the chromatic scale! the key is: ' + args.scales)
-        else:
-            for i in ChromaticScaleSharp:
-                if args.scales == i:
-                    print('The key was found in the chromatic scale! the key is: ' + args.scales)
-    if len(args.scales) == 1:
-        for i in ChromaticScaleSharp:
-            if args.scales == i:
-                print('The key was found in the chromatic scale! the key is: ' + args.scales)
-    if len(args.scales) > 2:
-        print('Please input a proper key. The keys are the following: ') 
-        for i in ChromaticScaleFlat:
-                print(i)
-        for i in ChromaticScaleSharp:
-                print(i)
+    Keyparser(args.scales)
+                
+#    if len(args.scales) > 1:
+#        if args.scales[1] == 'b':
+#            for i in ChromaticScaleFlat:
+#                if args.scales == i:
+#                    print('The key was found in the chromatic scale! the key is: ' + args.scales)
+#        else:
+#            for i in ChromaticScaleSharp:
+#                if args.scales == i:
+#                    print('The key was found in the chromatic scale! the key is: ' + args.scales)
+#    if len(args.scales) == 1:
+#        for i in ChromaticScaleSharp:
+#            if args.scales == i:
+#                print('The key was found in the chromatic scale! the key is: ' + args.scales)
+#    if len(args.scales) > 2:
+#        print('Please input a proper key. The keys are the following: ') 
+#        for i in ChromaticScaleFlat:
+#                print(i)
+#        for i in ChromaticScaleSharp:
+#                print(i)
 #    if args.name and args.scales:
 #        print('Hello There ' + args.name + '!')
 #    elif args.scales:
