@@ -13,14 +13,37 @@ Make sure that you have the Python KDevelop plugin installed.
 ChromaticScaleSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 ChromaticScaleFlat = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B']
 ChromaticScale = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B']
+CircleoffifthsSharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
+CircleoffifthsFlat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
+Circleoffifths = ['C', 'G', 'D', 'A', 'E', 'B', 'F#/Gb', 'C#/Db', 'Ab', 'Eb', 'Bb', 'F']
 def Majorkey(Keyin, ChromaticScalein, n):
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
     Nsteps = ['2', '2', '1', '2', '2', '2', '1']
-    
-    
+    Linkerlist = [12]
+    Newscale = [8]
+#First rearrange the scale to make sure no out of bounds things happen
+    x = 0
+    while(n<=ChromaticScalein.len):
+        for i in Linkerlist:
+                Linkerlist[i] = ChromaticScalein[n]
+                x = i
+                ++n
+    while(x<=(ChromaticScalein.len - n)):
+        for x in Linkerlist:
+            Linkerlist[x] = ChromaticScalein[x-n]
+    for i in Linkerlist:
+        print(Linkerlist[i])
 def Minorkey():
     Steps = ['W', 'H', 'W', 'W', 'H', 'W', 'W']
     Nsteps = ['2', '1', '2', '2', '1', '2', '2']
+    
+    
+def Printtofile(key, boolean):
+    
+    i = 0
+    while(i<= ChromaticScaleSharp.len):
+        Majorkey(ChromaticScaleSharp[i], ChromaticScaleSharp, i)
+    
     
 def Keyparser(keyargument):
     Key = keyargument
@@ -54,10 +77,11 @@ def main():
     parser = argparse.ArgumentParser(description='This project will take an input of a musical key and print the major and minor scales for it', formatter_class=CustomHelpFormatter)
     parser.add_argument('-v', '--version', action='version', version='circleoffifths 1.0')
     parser.add_argument('-s', '--scales', help='Use this parameter to print scales from a key. usage: -s *key* will print the keys scale')
+    parser.add_argument('-p', '--printtofile', action='store_true', help='Use this parameter to print all the scales from any key to a file or terminal. usage: -p for terminal, -p true for a file')
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
 #Run the keyparser subprogram to check if the key is valid and execute the scale logic
-    Keyparser(args.scales)
-        
+#   Keyparser(args.scales)
+    Printtofile(args.printtofile, args.printtofile)
         
                 
 #    if len(args.scales) > 1:
