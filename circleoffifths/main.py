@@ -10,29 +10,33 @@ from .utilities.CustomHelpFormatter import CustomHelpFormatter
 """ 
 Make sure that you have the Python KDevelop plugin installed.
 """
-ChromaticScaleSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-ChromaticScaleFlat = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B']
+#Double the length for all scales we do work on to ease the indexing
+ChromaticScaleSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B','C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+#doubled sharp and flat
+ChromaticScaleFlat = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B']
 ChromaticScale = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B']
-CircleoffifthsSharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
-CircleoffifthsFlat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
+CircleoffifthsSharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
+#doubled sharp and flat
+CircleoffifthsFlat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
 Circleoffifths = ['C', 'G', 'D', 'A', 'E', 'B', 'F#/Gb', 'C#/Db', 'Ab', 'Eb', 'Bb', 'F']
-def Majorkey(Keyin, ChromaticScalein, n = int()):
+                              
+def Majorkey(ChromaticScalein, n):
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
     Nsteps = ['2', '2', '1', '2', '2', '2', '1']
-    Linkerlist = [0 for z in range(12)]
-    Newscale = [0 for y in range(8)]
-#First rearrange the scale to make sure no out of bounds things happen
-    
+    #TODO implement this in a loop
+    Majorscale = [ChromaticScalein[n], ChromaticScalein[n+2], ChromaticScalein[n+4], ChromaticScalein[n+5], ChromaticScalein[n+7], ChromaticScalein[n+9], ChromaticScalein[n+11], ChromaticScalein[n+12]]
+    for note in Majorscale:
+        print(note+' ',end='')
     
     x = 0
-    k = 0
-    while(n<len(ChromaticScalein)):
-        Linkerlist[k] = ChromaticScalein[n]
-        x = k
-        k += 1
-        n += 1
-    while(x<(len(ChromaticScalein) - n)):
-        u = x - n
+    while(n<=ChromaticScalein.len):
+        for i in Linkerlist:
+                Linkerlist[i] = ChromaticScalein[n]
+                x = i
+                ++n
+    while(x<=(ChromaticScalein.len - n)):
+        for x in Linkerlist:
+            Linkerlist[x] = ChromaticScalein[x-n]
         Linkerlist[x] = ChromaticScalein.index[u]
         x += 1
     for i in Linkerlist:
@@ -46,8 +50,9 @@ def Printtofile(key, boolean):
     
     i = 0
     while(i<len(ChromaticScaleSharp)):
-        Majorkey(ChromaticScaleSharp[i], ChromaticScaleSharp, i)
+        Majorkey(ChromaticScaleSharp, i)
         i += 1
+        print()
     
     
 def Keyparser(keyargument):
@@ -85,8 +90,9 @@ def main():
     parser.add_argument('-p', '--printtofile', action='store_true', help='Use this parameter to print all the scales from any key to a file or terminal. usage: -p for terminal, -p true for a file')
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
 #Run the keyparser subprogram to check if the key is valid and execute the scale logic
-#   Keyparser(args.scales)
+#Keyparser(args.scales)
     Printtofile(args.printtofile, args.printtofile)
+                
         
                 
 #    if len(args.scales) > 1:
