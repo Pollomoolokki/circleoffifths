@@ -73,10 +73,12 @@ def main():
     parser = argparse.ArgumentParser(description='This project will take an input of a musical key and print the major and minor scales for it', formatter_class=CustomHelpFormatter)
     parser.add_argument('-v', '--version', action='version', version='circleoffifths 1.0')
     parser.add_argument('-s', '--scales', help='Use this parameter to print scales from a key. usage: -s *key* will print the keys scale')
-    parser.add_argument('-p', '--printtofile', action='store_true', help='Use this parameter to print all the scales from any key to a file or terminal. usage: -p for terminal, -p true for a file')
+    parser.add_argument('-p', '--printtofile', action='store_true', help='Use this parameter to print all the scales from any key to a file. usage: add -p after calling -s *KEY* to print to a file')
+    parser.add_argument('-a', '--all', action='store_true', help='Use this parameter to print all the scales of all the keys to a file. usage: -a')
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
 #Run the keyparser subprogram to check if the key is valid and execute the scale logic
 #Keyparser(args.scales)
+    print(args.printtofile)
     Printtofile(args.printtofile, args.printtofile)
                 
         
