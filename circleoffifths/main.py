@@ -32,7 +32,7 @@ def circleoffifths(ChromaticScalein, n):
     
 def Majorkey(ChromaticScalein, n):
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
-    Nsteps = ['2', '2', '1', '2', '2', '2', '1']
+    Nsteps = [2, 2, 1, 2, 2, 2, 1]
     #TODO implement this in a loop or with Nsteps
     Majorscale = [ChromaticScalein[n], ChromaticScalein[n+2], ChromaticScalein[n+4], ChromaticScalein[n+5], ChromaticScalein[n+7], ChromaticScalein[n+9], ChromaticScalein[n+11], ChromaticScalein[n+12]]
     print('Major scale notes:')
@@ -42,7 +42,7 @@ def Majorkey(ChromaticScalein, n):
 
 def Minorkey(ChromaticScalein, n):
     Steps = ['W', 'H', 'W', 'W', 'H', 'W', 'W']
-    Nsteps = ['2', '1', '2', '2', '1', '2', '2']
+    Nsteps = [2, 1, 2, 2, 1, 2, 2]
     Minorscale = [ChromaticScalein[n], ChromaticScalein[n+2], ChromaticScalein[n+3], ChromaticScalein[n+5], ChromaticScalein[n+7], ChromaticScalein[n+9], ChromaticScalein[n+10], ChromaticScalein[n+12]]
     print('Minor scale notes:')
     for note in Minorscale:
