@@ -27,20 +27,6 @@ def Majorkey(ChromaticScalein, n):
     Majorscale = [ChromaticScalein[n], ChromaticScalein[n+2], ChromaticScalein[n+4], ChromaticScalein[n+5], ChromaticScalein[n+7], ChromaticScalein[n+9], ChromaticScalein[n+11], ChromaticScalein[n+12]]
     for note in Majorscale:
         print(note+' ',end='')
-    
-    x = 0
-    while(n<=ChromaticScalein.len):
-        for i in Linkerlist:
-                Linkerlist[i] = ChromaticScalein[n]
-                x = i
-                ++n
-    while(x<=(ChromaticScalein.len - n)):
-        for x in Linkerlist:
-            Linkerlist[x] = ChromaticScalein[x-n]
-        Linkerlist[x] = ChromaticScalein.index[u]
-        x += 1
-    for i in Linkerlist:
-        print(i)
 def Minorkey():
     Steps = ['W', 'H', 'W', 'W', 'H', 'W', 'W']
     Nsteps = ['2', '1', '2', '2', '1', '2', '2']
@@ -49,7 +35,7 @@ def Minorkey():
 def Printtofile(key, boolean):
     
     i = 0
-    while(i<len(ChromaticScaleSharp)):
+    while(i<len(ChromaticScale)):
         Majorkey(ChromaticScaleSharp, i)
         i += 1
         print()
