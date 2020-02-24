@@ -23,15 +23,19 @@ Circleoffifths = ['C', 'G', 'D', 'A', 'E', 'B', 'F#/Gb', 'C#/Db', 'Ab', 'Eb', 'B
 def Majorkey(ChromaticScalein, n):
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
     Nsteps = ['2', '2', '1', '2', '2', '2', '1']
-    #TODO implement this in a loop
+    #TODO implement this in a loop or with Nsteps
     Majorscale = [ChromaticScalein[n], ChromaticScalein[n+2], ChromaticScalein[n+4], ChromaticScalein[n+5], ChromaticScalein[n+7], ChromaticScalein[n+9], ChromaticScalein[n+11], ChromaticScalein[n+12]]
+    print('Major scale notes:')
     for note in Majorscale:
         print(note+' ',end='')
-def Minorkey():
+
+def Minorkey(ChromaticScalein, n):
     Steps = ['W', 'H', 'W', 'W', 'H', 'W', 'W']
     Nsteps = ['2', '1', '2', '2', '1', '2', '2']
-    
-    
+    Minorscale = [ChromaticScalein[n], ChromaticScalein[n+2], ChromaticScalein[n+3], ChromaticScalein[n+5], ChromaticScalein[n+7], ChromaticScalein[n+9], ChromaticScalein[n+10], ChromaticScalein[n+12]]
+    print('Minor scale notes:')
+    for note in Minorscale:
+        print(note+' ',end='')
 def Printtofile(key, boolean):
     
     i = 0
@@ -39,7 +43,11 @@ def Printtofile(key, boolean):
         Majorkey(ChromaticScaleSharp, i)
         i += 1
         print()
-    
+    i = 0
+    while(i<len(ChromaticScale)):
+        Minorkey(ChromaticScaleSharp, i)
+        i += 1
+        print()
     
 def Keyparser(keyargument):
     Key = keyargument
@@ -78,6 +86,7 @@ def main():
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
 #Run the keyparser subprogram to check if the key is valid and execute the scale logic
 #Keyparser(args.scales)
+    
     print(args.printtofile)
     Printtofile(args.printtofile, args.printtofile)
                 
