@@ -63,6 +63,7 @@ def Printtofile(key, boolean):
         print()
     
 def Keyparser(keyargument):
+#TODO Fix this code to actually work with circleoffifths. if statements seem to be ok.
     Key = keyargument
     x = 0
     y = 0
