@@ -19,8 +19,12 @@ CircleoffifthsSharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb
 #doubled sharp and flat
 CircleoffifthsFlat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
 Circleoffifthsmajor = ['C', 'G', 'D', 'A', 'E', 'B', 'F#/Gb', 'C#/Db', 'Ab', 'Eb', 'Bb', 'F']
+Circleoffifthsmajorsharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
+Circleoffifthsmajorflat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
 #Lets make a list for major and minor circleoffifths. index is so that every n for major is relative minor
 Circleoffifthsminor = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'Eb/D#', 'Bb', 'F', 'C', 'G', 'D']
+Circleoffifthsminorsharp = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'Bb', 'F', 'C', 'G', 'D']
+Circleoffifthsminorflat = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'Eb', 'Bb', 'F', 'C', 'G', 'D']
 
 def circleoffifths(ChromaticScalein, n):
     Sharps = [6]
@@ -61,6 +65,7 @@ def Printtofile(key, boolean):
 def Keyparser(keyargument):
     Key = keyargument
     x = 0
+    y = 0
     if len(Key) > 1:
         if Key[1] == 'b':
             for i in ChromaticScaleFlat:
@@ -81,16 +86,18 @@ def Keyparser(keyargument):
                     #Execute logic for scales and circleoffifths
                     return True
     if len(Key) == 1:
-        for i in ChromaticScaleSharp:
+        for i in Circleoffifthsmajor:
             if Key == i:
-                x = ChromaticScaleSharp.index(i)
+                x = Circleoffifthsmajor.index(i)
                 #Check the position for Key.
                 if x <= 6:
-                    Majorkey(ChromaticScaleSharp, x)
-                    Minorkey(ChromaticScaleSharp, x)
+                    y = ChromaticScaleSharp.index(i)
+                    Majorkey(ChromaticScaleSharp, y)
+                    Minorkey(ChromaticScaleFlat, y)
                 if x > 6:
-                    Majorkey(ChromaticScaleFlat, x)
-                    Minorkey(ChromaticScaleFlat, x)
+                    y = ChromaticScaleFlat.index(i)
+                    Majorkey(ChromaticScaleFlat, y)
+                    Minorkey(ChromaticScaleSharp, y)
                 print('The key was found in the chromatic scale! the key is: ' + Key)
                 #Execute logic for scales and circleoffifths
                 #Think about circleoffifths
@@ -111,7 +118,7 @@ def main():
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
 #Run the keyparser subprogram to check if the key is valid and execute the scale logic
     Keyparser(args.scales)
-    
+    #print(ChromaticScale.index(args.scales))
     #Printtofile(args.printtofile, args.printtofile)
                 
         
