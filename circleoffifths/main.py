@@ -16,23 +16,27 @@ ChromaticScale = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', '
 CircleoffifthsSharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
 CircleoffifthsFlat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
 Circleoffifths = ['C', 'G', 'D', 'A', 'E', 'B', 'F#/Gb', 'C#/Db', 'Ab', 'Eb', 'Bb', 'F']
-def Majorkey(Keyin, ChromaticScalein, n):
+def Majorkey(Keyin, ChromaticScalein, n = int()):
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
     Nsteps = ['2', '2', '1', '2', '2', '2', '1']
-    Linkerlist = [12]
-    Newscale = [8]
+    Linkerlist = [0 for z in range(12)]
+    Newscale = [0 for y in range(8)]
 #First rearrange the scale to make sure no out of bounds things happen
+    
+    
     x = 0
-    while(n<=ChromaticScalein.len):
-        for i in Linkerlist:
-                Linkerlist[i] = ChromaticScalein[n]
-                x = i
-                ++n
-    while(x<=(ChromaticScalein.len - n)):
-        for x in Linkerlist:
-            Linkerlist[x] = ChromaticScalein[x-n]
+    k = 0
+    while(n<len(ChromaticScalein)):
+        Linkerlist[k] = ChromaticScalein[n]
+        x = k
+        k += 1
+        n += 1
+    while(x<(len(ChromaticScalein) - n)):
+        u = x - n
+        Linkerlist[x] = ChromaticScalein.index[u]
+        x += 1
     for i in Linkerlist:
-        print(Linkerlist[i])
+        print(i)
 def Minorkey():
     Steps = ['W', 'H', 'W', 'W', 'H', 'W', 'W']
     Nsteps = ['2', '1', '2', '2', '1', '2', '2']
@@ -41,8 +45,9 @@ def Minorkey():
 def Printtofile(key, boolean):
     
     i = 0
-    while(i<= ChromaticScaleSharp.len):
+    while(i<len(ChromaticScaleSharp)):
         Majorkey(ChromaticScaleSharp[i], ChromaticScaleSharp, i)
+        i += 1
     
     
 def Keyparser(keyargument):
