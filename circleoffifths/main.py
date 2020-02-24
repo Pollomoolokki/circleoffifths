@@ -18,8 +18,14 @@ ChromaticScale = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', '
 CircleoffifthsSharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
 #doubled sharp and flat
 CircleoffifthsFlat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
-Circleoffifths = ['C', 'G', 'D', 'A', 'E', 'B', 'F#/Gb', 'C#/Db', 'Ab', 'Eb', 'Bb', 'F']
-                              
+Circleoffifthsmajor = ['C', 'G', 'D', 'A', 'E', 'B', 'F#/Gb', 'C#/Db', 'Ab', 'Eb', 'Bb', 'F']
+#Lets make a list for major and minor circleoffifths. index is so that every n for major is relative minor
+Circleoffifthsminor = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'Eb/D#', 'Bb', 'F', 'C', 'G', 'D']
+
+def circleoffifths(ChromaticScalein, n):
+    Sharps = [6]
+    Flats = [6]
+    
 def Majorkey(ChromaticScalein, n):
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
     Nsteps = ['2', '2', '1', '2', '2', '2', '1']
@@ -77,14 +83,23 @@ def Keyparser(keyargument):
     if len(Key) == 1:
         for i in ChromaticScaleSharp:
             if Key == i:
+                x = ChromaticScaleSharp.index(i)
+                #Check the position for Key.
+                if x <= 6:
+                    Majorkey(ChromaticScaleSharp, x)
+                    Minorkey(ChromaticScaleSharp, x)
+                if x > 6:
+                    Majorkey(ChromaticScaleFlat, x)
+                    Minorkey(ChromaticScaleFlat, x)
                 print('The key was found in the chromatic scale! the key is: ' + Key)
                 #Execute logic for scales and circleoffifths
                 #Think about circleoffifths
                 return True
     print('Please input one of the following keys:')
     for i in ChromaticScale:
-                print(i)
-                return False
+                print(i, end=' ')
+    print()
+    return False
 #The main program runs version, help, name and scales parsing
 def main():
     #Start with the parser to get help arguments, version number and finally the scales argument to call the program with a key you want.
