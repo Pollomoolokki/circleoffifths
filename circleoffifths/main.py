@@ -50,7 +50,7 @@ def Minorkey(ChromaticScalein, n):
     print()
 
 def Printtofile(key, boolean):
-    
+#WORK IN PROGRESS
     i = 0
     while(i<len(ChromaticScale)):
         Majorkey(ChromaticScaleSharp, i)
@@ -81,8 +81,8 @@ def Keyparser(keyargument):
                 if Key == i:
                     x = ChromaticScaleSharp.index(i)
                     print('The key was found in the chromatic scale! the key is: ' + Key)
-                    Majorkey(ChromaticScaleFlat, x)
-                    Minorkey(ChromaticScaleFlat, x)
+                    Majorkey(ChromaticScaleSharp, x)
+                    Minorkey(ChromaticScaleSharp, x)
                     #Execute logic for scales and circleoffifths
                     return True
     if len(Key) == 1:
@@ -107,7 +107,7 @@ def Keyparser(keyargument):
                 print(i, end=' ')
     print()
     return False
-#The main program runs version, help, name and scales parsing
+#The main program runs version, help, name and scales parsing. It also runs the subprograms to print or save scales from given key.
 def main():
     #Start with the parser to get help arguments, version number and finally the scales argument to call the program with a key you want.
     parser = argparse.ArgumentParser(description='This project will take an input of a musical key and print the major and minor scales for it', formatter_class=CustomHelpFormatter)
@@ -116,9 +116,11 @@ def main():
     parser.add_argument('-p', '--printtofile', action='store_true', help='Use this parameter to print all the scales from any key to a file. usage: add -p after calling -s *KEY* to print to a file')
     parser.add_argument('-a', '--all', action='store_true', help='Use this parameter to print all the scales of all the keys to a file. usage: -a')
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
-#Run the keyparser subprogram to check if the key is valid and execute the scale logic
+#TODO Think about the logic for calling -p and -s
+#Run the keyparser subprogram to check if the key is valid and execute the scale logic printing major and minor scales from given key
     Keyparser(args.scales)
-    #print(ChromaticScale.index(args.scales))
+#Run the printtofile subprogram to print major and minor scales from all keys
+
     #Printtofile(args.printtofile, args.printtofile)
                 
         
