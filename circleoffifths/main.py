@@ -28,6 +28,7 @@ def Majorkey(ChromaticScalein, n):
     print('Major scale notes:')
     for note in Majorscale:
         print(note+' ',end='')
+    print()
 
 def Minorkey(ChromaticScalein, n):
     Steps = ['W', 'H', 'W', 'W', 'H', 'W', 'W']
@@ -36,6 +37,8 @@ def Minorkey(ChromaticScalein, n):
     print('Minor scale notes:')
     for note in Minorscale:
         print(note+' ',end='')
+    print()
+
 def Printtofile(key, boolean):
     
     i = 0
@@ -51,18 +54,24 @@ def Printtofile(key, boolean):
     
 def Keyparser(keyargument):
     Key = keyargument
+    x = 0
     if len(Key) > 1:
         if Key[1] == 'b':
             for i in ChromaticScaleFlat:
                 if Key == i:
+                    x = ChromaticScaleFlat.index(i)
                     print('The key was found in the chromatic scale! the key is: ' + Key)
-                    Majorkey(Key, ChromaticScaleFlat, i)
+                    Majorkey(ChromaticScaleFlat, x)
+                    Minorkey(ChromaticScaleFlat, x)
                     #Execute logic for scales and circleoffifths
                     return True
         else:
             for i in ChromaticScaleSharp:
                 if Key == i:
+                    x = ChromaticScaleSharp.index(i)
                     print('The key was found in the chromatic scale! the key is: ' + Key)
+                    Majorkey(ChromaticScaleFlat, x)
+                    Minorkey(ChromaticScaleFlat, x)
                     #Execute logic for scales and circleoffifths
                     return True
     if len(Key) == 1:
@@ -70,6 +79,7 @@ def Keyparser(keyargument):
             if Key == i:
                 print('The key was found in the chromatic scale! the key is: ' + Key)
                 #Execute logic for scales and circleoffifths
+                #Think about circleoffifths
                 return True
     print('Please input one of the following keys:')
     for i in ChromaticScale:
@@ -85,10 +95,9 @@ def main():
     parser.add_argument('-a', '--all', action='store_true', help='Use this parameter to print all the scales of all the keys to a file. usage: -a')
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
 #Run the keyparser subprogram to check if the key is valid and execute the scale logic
-#Keyparser(args.scales)
+    Keyparser(args.scales)
     
-    print(args.printtofile)
-    Printtofile(args.printtofile, args.printtofile)
+    #Printtofile(args.printtofile, args.printtofile)
                 
         
                 
