@@ -11,9 +11,11 @@ from .utilities.CustomHelpFormatter import CustomHelpFormatter
 Make sure that you have the Python KDevelop plugin installed.
 """
 #Double the length for all scales we do work on to ease the indexing
+#Originally I wanted to search for the key and reconstruct the list so it starts from the given key. It was not a success, however I found doubling the length of the scales to be an effective way to circumvent this problem.
 ChromaticScaleSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B','C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 #doubled sharp and flat
 ChromaticScaleFlat = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B']
+#This is only used for printing help if a wrong key is given and checking the length of the scale
 ChromaticScale = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B']
 CircleoffifthsSharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
 #doubled sharp and flat
@@ -21,7 +23,7 @@ CircleoffifthsFlat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb'
 Circleoffifthsmajor = ['C', 'G', 'D', 'A', 'E', 'B', 'F#/Gb', 'C#/Db', 'Ab', 'Eb', 'Bb', 'F']
 Circleoffifthsmajorsharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
 Circleoffifthsmajorflat = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F']
-#Lets make a list for major and minor circleoffifths. index is so that every n for major is relative minor
+#Lets make a list for major and minor circleoffifths. index is so that every n for major is it's relative minor in Circleoffifthsminor
 Circleoffifthsminor = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'Eb/D#', 'Bb', 'F', 'C', 'G', 'D']
 Circleoffifthsminorsharp = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'Bb', 'F', 'C', 'G', 'D']
 Circleoffifthsminorflat = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'Eb', 'Bb', 'F', 'C', 'G', 'D']
@@ -51,6 +53,8 @@ def Minorkey(ChromaticScalein, n):
 
 def Printtofile(key, boolean):
 #WORK IN PROGRESS
+#Next up is printing to file
+#TODO Print to a file. Either every key scale with -p or one scale with -p *KEY*
     i = 0
     while(i<len(ChromaticScale)):
         Majorkey(ChromaticScaleSharp, i)
@@ -63,7 +67,7 @@ def Printtofile(key, boolean):
         print()
     
 def Keyparser(keyargument):
-#TODO Fix this code to actually work with circleoffifths. if statements seem to be ok.
+#TODO Print the relative minor key scale and print out the major scale keys (1,2,3,4,5,6,7) 1,3,5 being major, 2,4,6 minor and 7 diminished/7th using circleoffifths
     Key = keyargument
     x = 0
     y = 0
