@@ -15,7 +15,7 @@ Make sure that you have the Python KDevelop plugin installed.
 #Originally I wanted to search for the key and reconstruct the list so it starts from the given key. It was not a success, however I found doubling the length of the scales to be an effective way to circumvent this problem.
 ChromaticScaleSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B','C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 #doubled sharp and flat
-ChromaticScaleFlat = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'G#', 'A', 'Bb', 'B']
+ChromaticScaleFlat = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
 #This is only used for printing help if a wrong key is given and checking the length of the scale
 ChromaticScale = ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B']
 CircleoffifthsSharp = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'Ab', 'Eb', 'Bb', 'F']
@@ -32,6 +32,7 @@ Circleoffifthsminorflat = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'Eb', 'Bb', 'F', 'C'
 def circleoffifths(ChromaticScalein, n):
     Sharps = [6]
     Flats = [6]
+    
     
 def Majorkey(ChromaticScalein, n):
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
@@ -70,23 +71,32 @@ def Printtofile(key, boolean):
 def Keyparser(keyargument):
 #TODO Print the relative minor key scale and print out the major scale keys (1,2,3,4,5,6,7) 1,3,5 being major, 2,4,6 minor and 7 diminished/7th using circleoffifths
     Key = keyargument
+    #x is used for ChromaticScale index. y is for Circleoffifthsmajor index and z for Circleoffifthsminor index
+    #k is used for checking the relative minor key
     x = 0
     y = 0
     z = 0
+    k = ''
     if len(Key) > 1:
         if Key[1] == 'b':
             for i in ChromaticScaleFlat:
                 if Key == i:
                     x = ChromaticScaleFlat.index(i)
                     print('The key was found in the chromatic scale! the key is: ' + Key)
-                    #Major is ok, minor to be fixed
+                    #Print the scale for majorkey. We know it's flat because of earlier if statement
                     Majorkey(ChromaticScaleFlat, x)
+                    #Check where the key is on circleoffifths
                     z = Circleoffifthsminorflat.index(i)
+                    #Use Sharps
                     if z <=6:
                         Minorkey(ChromaticScaleSharp, x)
+                    #Use Flats
                     if z > 6:
                         Minorkey(ChromaticScaleFlat, x)
-                    #Execute logic for scales and circleoffifths
+                    #Print the relative minor key
+                    y = Circleoffifthsmajorflat.index(i)
+                    k = Circleoffifthsminorflat[y]
+                    print('The relative minor key is :', k)
                     return True
         else:
             for i in ChromaticScaleSharp:
@@ -99,29 +109,34 @@ def Keyparser(keyargument):
                         Minorkey(ChromaticScaleSharp, x)
                     if z > 6:
                         Minorkey(ChromaticScaleFlat, x)
+                    y = Circleoffifthsmajorsharp.index(i)
+                    k = Circleoffifthsminorsharp[y]
+                    print('The relative minor key is :', k)
                     #Execute logic for scales and circleoffifths
                     return True
     if len(Key) == 1:
         for i in Circleoffifthsmajor:
             if Key == i:
-                x = Circleoffifthsmajor.index(i)
+                print('The key was found in the chromatic scale! the key is: ' + Key)
+                y = Circleoffifthsmajor.index(i)
                 z = Circleoffifthsminor.index(i)
                 #Check the position for Key.
-                if x <= 6:
-                    y = ChromaticScaleSharp.index(i)
-                    Majorkey(ChromaticScaleSharp, y)
+                if y <= 6:
+                    x = ChromaticScaleSharp.index(i)
+                    Majorkey(ChromaticScaleSharp, x)
+                    k = Circleoffifthsminorsharp[y]
                 if z <= 6:
-                    y = ChromaticScaleSharp.index(i)
-                    Minorkey(ChromaticScaleSharp, y)
-                if x > 6:
-                    y = ChromaticScaleFlat.index(i)
-                    Majorkey(ChromaticScaleFlat, y)
+                    x = ChromaticScaleSharp.index(i)
+                    Minorkey(ChromaticScaleSharp, x)
+                if y > 6:
+                    x = ChromaticScaleFlat.index(i)
+                    Majorkey(ChromaticScaleFlat, x)
+                    k = Circleoffifthsminorflat[y]
                 if z > 6:
-                    y = ChromaticScaleFlat.index(i)
-                    Minorkey(ChromaticScaleFlat, y)
-                print('The key was found in the chromatic scale! the key is: ' + Key)
+                    x = ChromaticScaleFlat.index(i)
+                    Minorkey(ChromaticScaleFlat, x)
                 #Execute logic for scales and circleoffifths
-                print(x,z,y)
+                print('The relative minor key is :', k)
                 #Think about circleoffifths
                 return True
     print('Please input one of the following keys:')
