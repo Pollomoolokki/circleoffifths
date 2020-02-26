@@ -10,6 +10,7 @@ from .utilities.CustomHelpFormatter import CustomHelpFormatter
 """ 
 Make sure that you have the Python KDevelop plugin installed.
 """
+#Testing commit on windows
 #Double the length for all scales we do work on to ease the indexing
 #Originally I wanted to search for the key and reconstruct the list so it starts from the given key. It was not a success, however I found doubling the length of the scales to be an effective way to circumvent this problem.
 ChromaticScaleSharp = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B','C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
