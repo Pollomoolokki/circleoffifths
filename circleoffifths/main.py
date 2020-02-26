@@ -38,6 +38,8 @@ def Majorkey(ChromaticScalein, n):
     Steps = ['W', 'W', 'H', 'W', 'W', 'W', 'H']
     Nsteps = [2, 2, 1, 2, 2, 2, 1]
     #TODO implement this in a loop or with Nsteps
+    #Sidenote: It makes awfully stupid code to use Nsteps. For example last index would be ChromaticScalein[n+[Nsteps[0]+Nsteps[1]+Nsteps[2]+...] etc. Dunno if Nsteps[0+7] is doable
+    #After some research - it is possible to call sum(0:len(Nsteps)) so the code would be something like: x=0 for i in Majorscale | i = ChromaticScalein[n+sum(Nsteps(0:x))] | x += 1
     Majorscale = [ChromaticScalein[n], ChromaticScalein[n+2], ChromaticScalein[n+4], ChromaticScalein[n+5], ChromaticScalein[n+7], ChromaticScalein[n+9], ChromaticScalein[n+11], ChromaticScalein[n+12]]
     print('Major scale notes:')
     for note in Majorscale:
@@ -99,6 +101,12 @@ def Keyparser(keyargument):
                     print('The relative minor key is :', k)
                     return True
         else:
+            print('Please input one of the following keys:')
+            for i in ChromaticScale:
+                print(i, end=' ')
+            print()
+            return False
+        if Key[1] == '#':
             for i in ChromaticScaleSharp:
                 if Key == i:
                     x = ChromaticScaleSharp.index(i)
@@ -114,6 +122,12 @@ def Keyparser(keyargument):
                     print('The relative minor key is :', k)
                     #Execute logic for scales and circleoffifths
                     return True
+        else:
+            print('Please input one of the following keys:')
+            for i in ChromaticScale:
+                print(i, end=' ')
+            print()
+            return False
     if len(Key) == 1:
         for i in Circleoffifthsmajor:
             if Key == i:
@@ -139,11 +153,13 @@ def Keyparser(keyargument):
                 print('The relative minor key is :', k)
                 #Think about circleoffifths
                 return True
-    print('Please input one of the following keys:')
-    for i in ChromaticScale:
-                print(i, end=' ')
-    print()
-    return False
+    else:
+        print('Please input one of the following keys:')
+        for i in ChromaticScale:
+            print(i, end=' ')
+        print()
+        return False
+    
 #The main program runs version, help, name and scales parsing. It also runs the subprograms to print or save scales from given key.
 def main():
     #Start with the parser to get help arguments, version number and finally the scales argument to call the program with a key you want.
