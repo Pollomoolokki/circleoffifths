@@ -170,6 +170,7 @@ def main():
     parser.add_argument('-a', '--all', action='store_true', help='Use this parameter to print all the scales of all the keys to a file. usage: -a')
     args: ArgsNamespace = cast(ArgsNamespace, parser.parse_args())
 #TODO Think about the logic for calling -p and -s
+#TODO Possible solution - print all to file  once? Make a new circleoffifths.py and import logic...?
 #Run the keyparser subprogram to check if the key is valid and execute the scale logic printing major and minor scales from given key
     Keyparser(args.scales)
 #Run the printtofile subprogram to print major and minor scales from all keys
